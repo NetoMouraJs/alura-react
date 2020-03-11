@@ -10,7 +10,9 @@
     "eject": "react-scripts eject"
   },
   "husky":{
-    "pre-commit": "lint-staged"
+    "hooks":{
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged":{
     "*.tsx": [

@@ -25,6 +25,8 @@ module.exports = {
 		'@typescript-eslint'
 	],
 	'rules': {
+		"linebreak-style": [0, "error", "windows"],
+		"no-useless-constructor": "off",
 		'indent': [
 			'error',
 			'tab'

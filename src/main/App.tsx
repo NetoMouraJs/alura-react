@@ -13,7 +13,7 @@ class App extends React.Component<IProps> {
 	constructor(props:IProps) {
 		super(props)
 	}
-  
+
 	render(){
 		return (
 			<div className="App">

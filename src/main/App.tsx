@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './App.css'
 
 import Table from './components/main/table/tableComponent'
+import Form from './components/main/form/Form'
 
 interface IProps {
-	name?:string,
-	autores?:any
 }
 
 class App extends React.Component<IProps> {
 
-	constructor(props:IProps) {
+	constructor(props: IProps) {
 		super(props)
 		console.log('App Running')
 	}
@@ -18,34 +17,34 @@ class App extends React.Component<IProps> {
 	state = {
 		autores: [
 			{
-				nome:'Paulo',
-				livro:'React',
-				preco:1000
+				nome: 'Paulo',
+				livro: 'React',
+				preco: 1000
 			},
 			{
-				nome:'Daniel',
-				livro:'Java',
-				preco:99
+				nome: 'Daniel',
+				livro: 'Java',
+				preco: 99
 			},
 			{
-				nome:'Marcos',
-				livro:'Design',
-				preco:150
+				nome: 'Marcos',
+				livro: 'Design',
+				preco: 150
 			},
 			{
-				nome:'Bruno',
-				livro:'DevOps',
-				preco:100
+				nome: 'Bruno',
+				livro: 'DevOps',
+				preco: 100
 			}
 		]
 
 	}
 
-	removeAutor = (index:number) =>{
+	removeAutor = (index: number) => {
 		this.setState(
 			{
 				autores: this.state.autores.filter(
-					(autor, posAtual) =>{
+					(autor, posAtual) => {
 						return posAtual !== index
 					}
 				)
@@ -53,11 +52,16 @@ class App extends React.Component<IProps> {
 		)
 	}
 
-	render(){
+	listenSubmit = (autor:any)=>{
+		this.setState({autores: [...this.state.autores,autor]})
+	}
+
+	render() {
 		return (
-			<div className="App">
-				<Table autores = { this.state.autores } removeAutor = { this.removeAutor }/>
-			</div>
+			<Fragment>
+				<Table autores={this.state.autores} removeAutor={this.removeAutor} />
+				<Form listenSubmit={this.listenSubmit}/>
+			</Fragment>
 		)
 	}
 }

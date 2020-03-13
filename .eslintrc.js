@@ -26,14 +26,11 @@ module.exports = {
 	],
 	'rules': {
 		"no-unused-vars": 0,
-		"linebreak-style": [0, "error", "windows"],
-		'indent': [
-			'error',
-			'tab'
-		],
+		"no-mixed-spaces-and-tabs": "off",
+		'indent': ["error","tab"],
 		'linebreak-style': [
 			'error',
-			'unix'
+			'windows'
 		],
 		'quotes': [
 			'error',

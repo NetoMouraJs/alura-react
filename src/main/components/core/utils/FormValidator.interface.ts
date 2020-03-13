@@ -1,10 +1,7 @@
+import { ValuesFormValidator } from './ValuesFormsValidator'
+
 export default interface IFormValidator{
-	validator(any:validatorValues, state:Object)	//	Any
+	validator(any:ValuesFormValidator[], state:Object)	//	Any
 }
 
-interface validatorValues{
-	campo: string,
-	metodo: string,
-	validoQuando:boolean,
-	messagem:string
-}
+

@@ -1,10 +1,22 @@
+//	@Imports Core
 import React from 'react'
 import 'materialize-css/dist/css/materialize.min.css'
 
-import HomeComponent from './components/main/home/HomeComponent'
+//	@Imports Components
+import HomeComponent from './components/home/HomeComponent'
 
-export default class App extends React.Component<{}> {
+//	@Imports Dependencies
+import { LivroRepository } from '../infra/LivroRepository'
+import { LivroService } from '../services/LivroService'
+
+//	@Composer Home
+const HomeComposer = () : LivroService=>{
+	return new LivroService(new LivroRepository())
+}
+
+//	@Import Main
+export default class App extends React.Component {
 	render() {
-		return <HomeComponent />
+		return <HomeComponent livroService={ HomeComposer() } />
 	}
 }

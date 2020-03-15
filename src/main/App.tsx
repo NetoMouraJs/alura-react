@@ -1,22 +1,29 @@
 //	@Imports Core
 import React from 'react'
 import 'materialize-css/dist/css/materialize.min.css'
+import { BrowserRouter, Switch } from 'react-router-dom'
 
 //	@Imports Components
-import HomeComponent from './components/home/HomeComponent'
+import LivroComponent from './livro/LivroComponent'
 
 //	@Imports Dependencies
 import { LivroRepository } from '../infra/LivroRepository'
 import { LivroService } from '../services/LivroService'
 
 //	@Composer Home
-const HomeComposer = () : LivroService=>{
+const HomeComposer = (): LivroService => {
 	return new LivroService(new LivroRepository())
 }
 
 //	@Import Main
 export default class App extends React.Component {
 	render() {
-		return <HomeComponent livroService={ HomeComposer() } />
+		return (
+			<BrowserRouter>
+				<Switch>
+					<LivroComponent livroService={HomeComposer()} />
+				</Switch>
+			</BrowserRouter>
+		)
 	}
 }

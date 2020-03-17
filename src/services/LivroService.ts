@@ -10,12 +10,19 @@ export class LivroService implements ILivroService {
 	constructor(livroRepository: ILivroRepository) {
 		this._livroRepository = livroRepository
 	}
-
-	GetLivros(): Livro[] {
-		return this._livroRepository.GetLivros()
+	async indexAsync(): Promise<Livro[]> {
+		return await this._livroRepository.indexAsync()
 	}
-
-	PostLivros(livros: Livro): boolean {
-		return this._livroRepository.PostLivros(livros)
+	async showAsync(): Promise<Livro[]> {
+		throw new Error('Method not implemented.')
+	}
+	async storeAsync(livro: Livro): Promise<Livro> {
+		return await this._livroRepository.storeAsync(livro)
+	}
+	async updateAsync(livro: Livro): Promise<Livro> {
+		throw new Error('Method not implemented.')
+	}
+	async destroyAsync(id: number): Promise<boolean> {
+		return await this._livroRepository.destroyAsync(id)
 	}
 }

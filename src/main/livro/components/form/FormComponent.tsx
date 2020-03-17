@@ -14,7 +14,7 @@ import './Form.css'
 //	@Contract StateInitial
 interface IStateInicial {
 	nome: string;
-	autor: string;
+	livro: string;
 	preco: string;
 }
 
@@ -32,7 +32,7 @@ interface IProps {
 export default class FormComponent extends React.Component<IProps, IState> {
 
 	//	@Var - Global - inicializa o state dos inputs do Form
-	public stateInicial: IStateInicial = { nome: '', autor: '', preco: '' };
+	public stateInicial: IStateInicial = { nome: '', livro: '', preco: '' };
 	public _livroService: ILivroService;
 	public _formValidator: IFormValidator;
 
@@ -67,7 +67,7 @@ export default class FormComponent extends React.Component<IProps, IState> {
 					messagem: 'Campo nome vazio!'
 				},
 				{
-					campo: 'autor',
+					campo: 'livro',
 					metodo: 'isEmpty',
 					validoQuando: false,
 					messagem: 'Campo nome vazio!'
@@ -86,8 +86,6 @@ export default class FormComponent extends React.Component<IProps, IState> {
 		if (errorOnForm.length === 0 ) {
 			this.props.listenSubmit(this.state) //	executa o evento de Submit do Parent
 			this.setState(this.stateInicial) // Limpa as variaveis do state atual
-			PopUp.exibeMensagem(StatusMessage.success, 'Incluido com Sucesso')
-
 		} else {
 			errorOnForm.forEach(error=>{
 				PopUp.exibeMensagem(StatusMessage.error, error.messagem)
@@ -97,7 +95,7 @@ export default class FormComponent extends React.Component<IProps, IState> {
 
 	//	@Method (React)
 	render() {
-		const { nome, autor, preco } = this.state
+		const { nome, livro, preco } = this.state
 
 		return (
 			<form>
@@ -116,15 +114,15 @@ export default class FormComponent extends React.Component<IProps, IState> {
 						/>
 					</div>
 					<div className="input-field col s4">
-						<label htmlFor="autor">
-							Autor
+						<label htmlFor="livro">
+							Livro
 						</label>
 						<input
 							type="text"
 							className="validate"
-							name="autor"
-							id="autor"
-							value={autor}
+							name="livro"
+							id="livro"
+							value={livro}
 							onChange={this.onChange}
 						/>
 					</div>

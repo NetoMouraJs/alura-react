@@ -8,15 +8,7 @@ interface IProps {
 }
 
 export default class DataTableComponent extends Component<IProps, {}> {
-	/**
-	 *
-	 */
-	constructor(props) {
-		super(props)
-	}
 	render() {
-		// let linhas = this.props.dados.map(livro => <td>ola</td> )
-		console.log(this.props.dados)
 		let linhas = this.props.dados.map((item: Livro, index) => (
 			<tr key={index}>
 				{this.props.colunas.map((coluna: any) => (
@@ -24,7 +16,6 @@ export default class DataTableComponent extends Component<IProps, {}> {
 				))}
 			</tr>
 		))
-		console.log(linhas)
 		return (
 			<table className="centered highlight">
 				<thead>

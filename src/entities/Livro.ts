@@ -1,10 +1,12 @@
 export class Livro {
+	id?: number
 	nome: string;
-	autor: string;
+	livro: string;
 	preco: number;
-	constructor(nome: string, autor: string, preco: number) {
+	constructor(nome: string, livro: string, preco: number, id?:number) {
+		this.id = id
 		this.nome = nome
-		this.autor = autor
+		this.livro = livro
 		this.preco = preco
 	}
 }

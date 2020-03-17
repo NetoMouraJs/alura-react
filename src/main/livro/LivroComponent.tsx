@@ -1,6 +1,9 @@
 //	@Imports Core
 import React, { Fragment } from 'react'
 
+// @Imports Composer
+import LivroComposer from './LivroComposer'
+
 //	@Imports Utils
 import PopUp, {
 	StatusMessage
@@ -42,6 +45,8 @@ const FormComposer = (): FormValidator => {
 	return new FormValidator()
 }
 
+export {LivroComposer}
+
 //	@Class Main
 export default class LivroComponent extends React.Component<IProps, IStates> {
 	public _livrosService: ILivroService;
@@ -51,28 +56,41 @@ export default class LivroComponent extends React.Component<IProps, IStates> {
 
 		this._livrosService = this.props.livroService
 
-		this.state = {
-			livros: this.props.livroService.GetLivros()
-		}
+		this.state = { livros: [] }
+	}
+	async componentDidMount(){
+		this.setState({livros: await this.props.livroService.indexAsync()})
 	}
 
 	//	@Method responsavel pela remoçao de um elemento vindo do "Child Component" atraves dos props
-	removeLivro = (index: number) => {
-		this.setState({
-			livros: this.state.livros.filter((livro, posAtual) => {
-				return posAtual !== index
-			})
-		})
-		PopUp.exibeMensagem(StatusMessage.success, 'Removido com Sucesso')
+	removeLivro = async (id: number) => {
+		try{
+			let wasDeleted = await this.props.livroService.destroyAsync(id)
+	
+			if(wasDeleted){
+				this.setState({
+					livros: this.state.livros.filter((livro) => {
+						return livro.id !== id
+					})
+				})
+				PopUp.exibeMensagem(StatusMessage.success, 'Removido com Sucesso')
+			}else{
+				PopUp.exibeMensagem(StatusMessage.error, 'Erro ao remover')
+			}
+		}catch(err){
+			PopUp.exibeMensagem(StatusMessage.error, 'Erro ao se comunicar com o Servidor API')			
+		}
 	};
 
 	//	@Method, responsavel por pegar os valores do input e inserir dentro do state que armazena os autores
-	listenSubmit = (livro: Livro) => {
+	listenSubmit = async (livro: Livro) => {
 		try {
-			this._livrosService.PostLivros(livro)
-			this.setState({ livros: [...this.state.livros, livro] })
+			let livroStored = await this._livrosService.storeAsync(livro)
+			this.setState({ livros: [...this.state.livros, livroStored] })
+
+			PopUp.exibeMensagem(StatusMessage.success, 'Incluido com Sucesso')
 		} catch {
-			console.error('Erro')
+			PopUp.exibeMensagem(StatusMessage.error, 'Erro ao se comunicar com o Servidor API')	
 		}
 	};
 

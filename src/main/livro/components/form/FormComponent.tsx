@@ -8,6 +8,9 @@ import PopUp, { StatusMessage } from '../../../../presentation/utils/PopUpNotifi
 import { ILivroService } from '../../../../services/LivroService'
 import IFormValidator from '../../../../utils/FormValidator.interface'
 
+//	@Imports Css
+import './Form.css'
+
 //	@Contract StateInitial
 interface IStateInicial {
 	nome: string;
@@ -100,7 +103,7 @@ export default class FormComponent extends React.Component<IProps, IState> {
 			<form>
 				<div className="row">
 					<div className="input-field col s4">
-						<label className="input-field" htmlFor="nome">
+						<label htmlFor="nome">
 							Nome
 						</label>
 						<input
@@ -112,9 +115,8 @@ export default class FormComponent extends React.Component<IProps, IState> {
 							onChange={this.onChange}
 						/>
 					</div>
-
 					<div className="input-field col s4">
-						<label className="input-field" htmlFor="autor">
+						<label htmlFor="autor">
 							Autor
 						</label>
 						<input
@@ -128,7 +130,7 @@ export default class FormComponent extends React.Component<IProps, IState> {
 					</div>
 
 					<div className="input-field col s4">
-						<label className="input-field" htmlFor="preco">
+						<label htmlFor="preco">
 							Preço
 						</label>
 						<input

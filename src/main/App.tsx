@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 //	@Imports Dependencies
 import { LivroRepository } from '../infra/LivroRepository'
-import { ILivroService,LivroService } from '../services/LivroService'
+import { ILivroService, LivroService } from '../services/LivroService'
 
 //	@Imports Components
 import LivroComponent from './livro/LivroComponent'
@@ -13,7 +13,7 @@ import SobreComponent from './sobre/SobreComponent'
 import AutorComponent from './autor/AutorComponent'
 
 //	@Imports Components Utils
-import {NotFoundComponent} from './core'
+import { NotFoundComponent } from './core'
 
 //	@Composer Home
 const LivroComposer = (): ILivroService => {
@@ -36,22 +36,16 @@ export default class App extends React.Component {
 					<Route
 						exact
 						path="/sobre"
-						render={() => (
-							<SobreComponent />
-						)}
+						render={() => <SobreComponent />}
 					/>
 					<Route
 						exact
 						path="/autores"
 						render={() => (
-							<AutorComponent livroService={LivroComposer()}/>
+							<AutorComponent livroService={LivroComposer()} />
 						)}
 					/>
-					<Route
-						render={() => (
-							<NotFoundComponent />
-						)}
-					/>
+					<Route render={() => <NotFoundComponent />} />
 				</Switch>
 			</BrowserRouter>
 		)
